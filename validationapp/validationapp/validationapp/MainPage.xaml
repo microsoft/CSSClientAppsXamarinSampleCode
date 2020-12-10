@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="validationapp.MainPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:behaviour="clr-namespace:validationapp.Behaviors"
+    xmlns:converter="clr-namespace:validationapp.converters"
+    xmlns:local="clr-namespace:validationapp">
+    <ContentPage.Resources>
+       
+        <converter:InverseBoolConverter x:Key="InverseBoolConverter" />
+        <converter:FirstValidationErrorConverter x:Key="FirstValidationErrorConverter" />
+        <Style x:Key="ErrorTextStyle" TargetType="Label">
+            <Setter Property="TextColor" Value="Red" />
+            <Setter Property="FontSize" Value="12" />
+        </Style>
+    </ContentPage.Resources>
+    <StackLayout>
+        <!--  First Name  -->
+        <Entry Placeholder="First Name" Text="{Binding FirstName.Value}">
+            <Entry.Behaviors>
+                <behaviour:EntryLineValidationBehaviour IsValid="{Binding FirstName.IsValid}" />
+            </Entry.Behaviors>
+        </Entry>
+
+        <Label
+            IsVisible="{Binding FirstName.IsValid, Converter={StaticResource InverseBoolConverter}}"
+            Style="{StaticResource ErrorTextStyle}"
+            Text="{Binding FirstName.Errors, Converter={StaticResource FirstValidationErrorConverter}}" />
+        <!--  /First Name  -->
+
+        <!--  Last Name  -->
+        <Entry Placeholder="Last Name" Text="{Binding LastName.Value}">
+            <Entry.Behaviors>
+                <behaviour:EntryLineValidationBehaviour IsValid="{Binding LastName.IsValid}" />
+            </Entry.Behaviors>
+        </Entry>
+
+        <Label
+            IsVisible="{Binding LastName.IsValid, Converter={StaticResource InverseBoolConverter}}"
+            Style="{StaticResource ErrorTextStyle}"
+            Text="{Binding LastName.Errors, Converter={StaticResource FirstValidationErrorConverter}}" />
+        <!--  /Last Name  -->
+
+
+        <!--  Birthday  -->
+        <DatePicker Date="{Binding BirthDay.Value}" />
+        <Label
+            IsVisible="{Binding BirthDay.IsValid, Converter={StaticResource InverseBoolConverter}}"
+            Style="{StaticResource ErrorTextStyle}"
+            Text="{Binding BirthDay.Errors, Converter={StaticResource FirstValidationErrorConverter}}" />
+        <!--  Birthday  -->
+    </StackLayout>
+
+</ContentPage>
