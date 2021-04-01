@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:viewmodels="clr-namespace:CollectionviewBindingWithPreference"
+             x:Class="CollectionviewBindingWithPreference.MainPage">
+
+    <ContentPage.BindingContext>
+        <viewmodels:AchievementsViewModule></viewmodels:AchievementsViewModule>
+    </ContentPage.BindingContext>
+
+    <StackLayout>
+        <Button Text="navi" Clicked="Button_Clicked"></Button>
+        <CollectionView x:DataType="viewmodels:AchievementsViewModule"
+                         SelectionMode="Single"
+             ItemsSource= "{Binding Achievements}"
+             SelectionChanged="CollectionView_SelectionChanged">
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Padding="10"
+                       x:DataType="viewmodels:Achievement"
+                      RowDefinitions="Auto, *"
+                       ColumnDefinitions="Auto, *">
+                        <Image Grid.RowSpan="2" BackgroundColor="Red"
+                        Source="{Binding ImageUrl}"
+                        Aspect="AspectFill"
+                        HeightRequest="50"
+                        WidthRequest="50" />
+                        <Label Grid.Column="1" HorizontalOptions="StartAndExpand" BackgroundColor="Green"
+                        Text="{Binding Title}"
+                        FontAttributes="Bold" />
+                        <Label Grid.Row="1" HorizontalOptions="Start" BackgroundColor="Yellow"
+                        Grid.Column="1"
+                        Text="{Binding Subtitle}"
+                        VerticalOptions="End" />
+                        <CheckBox 
+                            Grid.RowSpan="2" 
+                            Grid.Column="3"
+                            IsChecked="{Binding Completed}">
+                        </CheckBox>
+
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+    </StackLayout>
+
+</ContentPage>
