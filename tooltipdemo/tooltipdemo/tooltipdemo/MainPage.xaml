@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="tooltipdemo.MainPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:effects="clr-namespace:tooltipdemo">
+
+    <StackLayout>
+        <Button
+            x:Name="btn"
+            effects:TooltipEffect.HasTooltip="True"
+            effects:TooltipEffect.Position="Bottom"
+            effects:TooltipEffect.Text="Here is a sample text for this tool tip that can help us later, here is more text to showcase the tooltip bottom"
+            HorizontalOptions="Center"
+            Text="Show Tooltip"
+            VerticalOptions="StartAndExpand"
+            WidthRequest="150" />
+    </StackLayout>
+
+</ContentPage>
